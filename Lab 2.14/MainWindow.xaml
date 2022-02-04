@@ -1,0 +1,48 @@
+﻿<Window x:Class="Task_36_WPF_14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task_36_WPF_14"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+    <Window.Resources>
+        <DataTemplate x:Key="MyTemplate">
+            <Border  x:Name="border" BorderBrush="Red" BorderThickness="2" Padding="5" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Width="50" Height="50" Source="{Binding Path=Image}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Название:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path=NameProduct}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Цена:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=Price}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Категория:"/>
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Path=Category}"/>
+                </Grid>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Category}">
+                    <DataTrigger.Value>
+                        <local:Category>Food</local:Category>
+                    </DataTrigger.Value>
+                    <Setter TargetName="border" Property="BorderBrush" Value="green"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Name="productTitle" FontSize="30" Text="Товары:" FontFamily="Impact"/>
+        <ListBox Name="IstBox" Margin="20,10,20,10" Height="400" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch"/>
+        <Button Content="Добавить" Click="Button_Click"/>
+    </StackPanel>
+</Window>
